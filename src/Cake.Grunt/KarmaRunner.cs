@@ -7,15 +7,39 @@ using Cake.Core.Tooling;
 
 namespace Cake.Karma
 {
+    /// <summary>
+    /// The karma runner for local mode execution.
+    /// </summary>
+    /// <typeparam name="TSettings">The type of settings to provide for the relevant karma command (start, run, init).</typeparam>
     public sealed class KarmaRunnerLocal<TSettings> : KarmaRunner<TSettings>
         where TSettings : KarmaSettings, new()
     {
+        /// <summary>
+        /// Default constructor for <see cref="KarmaRunnerLocal{TSettings}" />.
+        /// </summary>
+        /// <param name="fileSystem"></param>
+        /// <param name="environment"></param>
+        /// <param name="processRunner"></param>
+        /// <param name="tools"></param>
         public KarmaRunnerLocal(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
             : base(fileSystem, environment, processRunner, tools)
         {
         }
 
 
+        /// <summary>
+        /// The name of the tool, used during logging.
+        /// </summary>
+        /// <returns>The name of the tool.</returns>
+        protected override string GetToolName()
+        {
+            return "Karma Runner (Local)";
+        }
+
+        /// <summary>
+        /// Available tool executable names for local karma runs.
+        /// </summary>
+        /// <returns>The available tool execution names.</returns>
         protected override IEnumerable<string> GetToolExecutableNames()
         {
             yield return "node.exe";
@@ -24,20 +48,10 @@ namespace Cake.Karma
         }
 
         /// <summary>
-        /// Executes karma
+        /// Execute the runner with the specified settings. If LocalKarmaCli is not set, it defaults to <see cref="KarmaSettings.DefaultCliFile" />.
         /// </summary>
-        public override void Execute(Action<TSettings> configure)
-        {
-            if (configure == null)
-            {
-                throw new ArgumentNullException(nameof(configure));
-            }
-
-            var settings = new TSettings();
-            configure.Invoke(settings);
-            Execute(settings);
-        }
-
+        /// <param name="settings">Command settings.</param>
+        /// <exception cref="ArgumentNullException">Thrown if settings is null.</exception>
         public override void Execute(TSettings settings)
         {
             if (settings == null)
@@ -60,6 +74,12 @@ namespace Cake.Karma
             Run(settings, args);
         }
 
+        /// <summary>
+        /// Validates the provides settings for local mode.
+        /// </summary>
+        /// <param name="settings">The settings to validate.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the runner is used when settings.RunMode is not Local.</exception>
+        /// <exception cref="FileNotFoundException">Thrown if the Karma CLI file cannot be located.</exception>
         protected override void ValidateSettings(TSettings settings)
         {
             base.ValidateSettings(settings);
@@ -80,14 +100,28 @@ namespace Cake.Karma
 
 
     /// <summary>
-    /// The base runner for global karma commands.
+    /// The karma runner for global mode execution.
     /// </summary>
+    /// <typeparam name="TSettings">The type of settings to provide for the relevant karma command (start, run, init).</typeparam>
     public class KarmaRunner<TSettings> : Tool<TSettings> where TSettings : KarmaSettings, new()
     {
+        /// <summary>
+        /// A reference to the supplied <see cref="ICakeEnvironment" />.
+        /// </summary>
         protected ICakeEnvironment Environment { get; }
+        /// <summary>
+        /// A reference to the supplied <see cref="IFileSystem" />.
+        /// </summary>
         protected IFileSystem FileSystem { get; }
 
 
+        /// <summary>
+        /// Default constructor for <see cref="KarmaRunner{TSettings}" />.
+        /// </summary>
+        /// <param name="fileSystem"></param>
+        /// <param name="environment"></param>
+        /// <param name="processRunner"></param>
+        /// <param name="tools"></param>
         public KarmaRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
             : base(fileSystem, environment, processRunner, tools)
         {
@@ -96,11 +130,19 @@ namespace Cake.Karma
         }
 
 
+        /// <summary>
+        /// The name of the tool, used during logging.
+        /// </summary>
+        /// <returns>The name of the tool.</returns>
         protected override string GetToolName()
         {
-            return "Karma Runner";
+            return "Karma Runner (Global)";
         }
 
+        /// <summary>
+        /// Available tool executable names for local karma runs.
+        /// </summary>
+        /// <returns>The available tool execution names.</returns>
         protected override IEnumerable<string> GetToolExecutableNames()
         {
             yield return "karma.cmd";
@@ -108,21 +150,10 @@ namespace Cake.Karma
         }
 
         /// <summary>
-        /// Executes karma
+        /// Execute the runner with the specified settings.
         /// </summary>
-        public virtual void Execute(Action<TSettings> configure)
-        {
-            if (configure == null)
-            {
-                throw new ArgumentNullException(nameof(configure));
-            }
-
-            var settings = new TSettings();
-            configure.Invoke(settings);
-
-            Execute(settings);
-        }
-
+        /// <param name="settings">Command settings.</param>
+        /// <exception cref="ArgumentNullException">Thrown if settings is null.</exception>
         public virtual void Execute(TSettings settings)
         {
             if (settings == null)
@@ -139,10 +170,11 @@ namespace Cake.Karma
         }
 
         /// <summary>
-        /// Validates settings
+        /// Validates the provides settings for global mode.
         /// </summary>
-        /// <param name="settings">the settings class</param>
-        /// <exception cref="FileNotFoundException">when config file does not exist</exception>
+        /// <param name="settings">The settings to validate.</param>
+        /// <exception cref="ArgumentNullException">Thrown if the config file setting value is null.</exception>
+        /// <exception cref="FileNotFoundException">Thrown if the config file cannot be located.</exception>
         protected virtual void ValidateSettings(TSettings settings)
         {
             if (settings.ConfigFile == null)

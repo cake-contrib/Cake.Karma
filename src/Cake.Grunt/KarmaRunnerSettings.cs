@@ -40,10 +40,25 @@ namespace Cake.Karma
     /// </summary>
     public enum KarmaReporter
     {
+        /// <summary>
+        /// Dots.
+        /// </summary>
         Dots,
+        /// <summary>
+        /// Progress.
+        /// </summary>
         Progress,
+        /// <summary>
+        /// JUnit.
+        /// </summary>
         JUnit,
+        /// <summary>
+        /// Growl.
+        /// </summary>
         Growl,
+        /// <summary>
+        /// Coverage.
+        /// </summary>
         Coverage
     }
 
@@ -54,7 +69,13 @@ namespace Cake.Karma
     /// </summary>
     public enum KarmaRunMode
     {
+        /// <summary>
+        /// Run the command using local Karma.
+        /// </summary>
         Local,
+        /// <summary>
+        /// Run the command using global Karma.
+        /// </summary>
         Global
     }
     
@@ -65,6 +86,9 @@ namespace Cake.Karma
     /// </summary>
     public class KarmaSettings : ToolSettings
     {
+        /// <summary>
+        /// The default Karma CLI file, if one is not specified during local run mode.
+        /// </summary>
         public const string DefaultCliFile = "node_modules/karma-cli/bin/karma";
 
         internal virtual string Command { get; } = "init";
@@ -138,6 +162,9 @@ namespace Cake.Karma
 
 
     
+    /// <summary>
+    /// Settings shared across start and run commands.
+    /// </summary>
     public abstract class KarmaSharedSettings : KarmaSettings
     {
         /// <summary>
@@ -179,6 +206,9 @@ namespace Cake.Karma
 
 
 
+    /// <summary>
+    /// Settings specific to karma run.
+    /// </summary>
     public class KarmaRunSettings : KarmaSharedSettings
     {
         internal override string Command { get; } = "run";
@@ -189,6 +219,10 @@ namespace Cake.Karma
         /// </summary>
         public bool NoRefresh { get; set; }
 
+        /// <summary>
+        /// Applies the settings to the process arguments ready for execution.
+        /// </summary>
+        /// <param name="args">The builder to apply the settings to.</param>
         protected override void EvaluateCore(ProcessArgumentBuilder args)
         {
             base.EvaluateCore(args);
@@ -202,6 +236,9 @@ namespace Cake.Karma
 
 
 
+    /// <summary>
+    /// Settings specific to karma start.
+    /// </summary>
     public class KarmaStartSettings : KarmaSharedSettings
     {
         internal override string Command { get; } = "start";
@@ -251,6 +288,10 @@ namespace Cake.Karma
         /// </summary>
         public int? ReportSlowerThan { get; set; }
 
+        /// <summary>
+        /// Applies the settings to the process arguments ready for execution.
+        /// </summary>
+        /// <param name="args">The builder to apply the settings to.</param>
         protected override void EvaluateCore(ProcessArgumentBuilder args)
         {
             base.EvaluateCore(args);

@@ -6,7 +6,7 @@
     <members>
         <member name="T:Cake.Karma.KarmaAliases">
             <summary>
-            contains functionality to interact with karma
+            Contains functionality to interact with karma start, karma run, or karma init commands.
             </summary>
         </member>
         <member name="M:Cake.Karma.KarmaAliases.KarmaStart(Cake.Core.ICakeContext,System.Action{Cake.Karma.KarmaStartSettings})">
@@ -29,7 +29,7 @@
         </member>
         <member name="M:Cake.Karma.KarmaAliases.KarmaStart(Cake.Core.ICakeContext,Cake.Karma.KarmaStartSettings)">
             <summary>
-            Runs karma start with a function for settings.
+            Runs karma start with settings.
             </summary>
             <param name="context">The context.</param>
             <param name="settings">The command settings.</param>
@@ -79,7 +79,7 @@
         </member>
         <member name="M:Cake.Karma.KarmaAliases.KarmaRun(Cake.Core.ICakeContext,Cake.Karma.KarmaRunSettings)">
             <summary>
-            Runs karma run with a function for settings.
+            Runs karma run with settings.
             </summary>
             <param name="context">The context.</param>
             <param name="settings">The command settings.</param>
@@ -129,7 +129,7 @@
         </member>
         <member name="M:Cake.Karma.KarmaAliases.KarmaInit(Cake.Core.ICakeContext,Cake.Karma.KarmaSettings)">
             <summary>
-            Runs karma init with a function for settings.
+            Runs karma init with settings.
             </summary>
             <param name="context">The context.</param>
             <param name="settings">The command settings.</param>
@@ -159,27 +159,121 @@
             </code>
             </example>
         </member>
-        <member name="M:Cake.Karma.KarmaRunnerLocal`1.Execute(System.Action{`0})">
+        <member name="T:Cake.Karma.KarmaRunnerLocal`1">
             <summary>
-            Executes karma
+            The karma runner for local mode execution.
             </summary>
+            <typeparam name="TSettings">The type of settings to provide for the relevant karma command (start, run, init).</typeparam>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunnerLocal`1.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator)">
+            <summary>
+            Default constructor for <see cref="T:Cake.Karma.KarmaRunnerLocal`1" />.
+            </summary>
+            <param name="fileSystem"></param>
+            <param name="environment"></param>
+            <param name="processRunner"></param>
+            <param name="tools"></param>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunnerLocal`1.GetToolName">
+            <summary>
+            The name of the tool, used during logging.
+            </summary>
+            <returns>The name of the tool.</returns>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunnerLocal`1.GetToolExecutableNames">
+            <summary>
+            Available tool executable names for local karma runs.
+            </summary>
+            <returns>The available tool execution names.</returns>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunnerLocal`1.Execute(`0)">
+            <summary>
+            Execute the runner with the specified settings. If LocalKarmaCli is not set, it defaults to <see cref="F:Cake.Karma.KarmaSettings.DefaultCliFile" />.
+            </summary>
+            <param name="settings">Command settings.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if settings is null.</exception>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunnerLocal`1.ValidateSettings(`0)">
+            <summary>
+            Validates the provides settings for local mode.
+            </summary>
+            <param name="settings">The settings to validate.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when the runner is used when settings.RunMode is not Local.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown if the Karma CLI file cannot be located.</exception>
         </member>
         <member name="T:Cake.Karma.KarmaRunner`1">
             <summary>
-            The base runner for global karma commands.
+            The karma runner for global mode execution.
+            </summary>
+            <typeparam name="TSettings">The type of settings to provide for the relevant karma command (start, run, init).</typeparam>
+        </member>
+        <member name="P:Cake.Karma.KarmaRunner`1.Environment">
+            <summary>
+            A reference to the supplied <see cref="T:Cake.Core.ICakeEnvironment" />.
             </summary>
         </member>
-        <member name="M:Cake.Karma.KarmaRunner`1.Execute(System.Action{`0})">
+        <member name="P:Cake.Karma.KarmaRunner`1.FileSystem">
             <summary>
-            Executes karma
+            A reference to the supplied <see cref="T:Cake.Core.IO.IFileSystem" />.
             </summary>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunner`1.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator)">
+            <summary>
+            Default constructor for <see cref="T:Cake.Karma.KarmaRunner`1" />.
+            </summary>
+            <param name="fileSystem"></param>
+            <param name="environment"></param>
+            <param name="processRunner"></param>
+            <param name="tools"></param>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunner`1.GetToolName">
+            <summary>
+            The name of the tool, used during logging.
+            </summary>
+            <returns>The name of the tool.</returns>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunner`1.GetToolExecutableNames">
+            <summary>
+            Available tool executable names for local karma runs.
+            </summary>
+            <returns>The available tool execution names.</returns>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunner`1.Execute(`0)">
+            <summary>
+            Execute the runner with the specified settings.
+            </summary>
+            <param name="settings">Command settings.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if settings is null.</exception>
         </member>
         <member name="M:Cake.Karma.KarmaRunner`1.ValidateSettings(`0)">
             <summary>
-            Validates settings
+            Validates the provides settings for global mode.
             </summary>
-            <param name="settings">the settings class</param>
-            <exception cref="T:System.IO.FileNotFoundException">when config file does not exist</exception>
+            <param name="settings">The settings to validate.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if the config file setting value is null.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown if the config file cannot be located.</exception>
+        </member>
+        <member name="T:Cake.Karma.KarmaRunnerFactory">
+            <summary>
+            The karma runner factory, determines which runner to use based on run mode.
+            </summary>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunnerFactory.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator)">
+            <summary>
+            Default constructor for <see cref="T:Cake.Karma.KarmaRunnerFactory" />.
+            </summary>
+            <param name="fileSystem"></param>
+            <param name="environment"></param>
+            <param name="processRunner"></param>
+            <param name="tools"></param>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunnerFactory.CreateRunner``1(Cake.Karma.KarmaRunMode)">
+            <summary>
+            Creates a new runner based on run mode.
+            </summary>
+            <typeparam name="TSettings">The type of settings to use for the runner.</typeparam>
+            <param name="runMode">The run mode of the command.</param>
+            <returns>A fully constructed <see cref="T:Cake.Karma.KarmaRunner`1"/>.</returns>
         </member>
         <member name="T:Cake.Karma.KarmaLogLevel">
             <summary>
@@ -216,14 +310,54 @@
             Available Karma reporters.
             </summary>
         </member>
+        <member name="F:Cake.Karma.KarmaReporter.Dots">
+            <summary>
+            Dots.
+            </summary>
+        </member>
+        <member name="F:Cake.Karma.KarmaReporter.Progress">
+            <summary>
+            Progress.
+            </summary>
+        </member>
+        <member name="F:Cake.Karma.KarmaReporter.JUnit">
+            <summary>
+            JUnit.
+            </summary>
+        </member>
+        <member name="F:Cake.Karma.KarmaReporter.Growl">
+            <summary>
+            Growl.
+            </summary>
+        </member>
+        <member name="F:Cake.Karma.KarmaReporter.Coverage">
+            <summary>
+            Coverage.
+            </summary>
+        </member>
         <member name="T:Cake.Karma.KarmaRunMode">
             <summary>
             Run modes.
             </summary>
         </member>
+        <member name="F:Cake.Karma.KarmaRunMode.Local">
+            <summary>
+            Run the command using local Karma.
+            </summary>
+        </member>
+        <member name="F:Cake.Karma.KarmaRunMode.Global">
+            <summary>
+            Run the command using global Karma.
+            </summary>
+        </member>
         <member name="T:Cake.Karma.KarmaSettings">
             <summary>
             Settings common across all Karma commands.
+            </summary>
+        </member>
+        <member name="F:Cake.Karma.KarmaSettings.DefaultCliFile">
+            <summary>
+            The default Karma CLI file, if one is not specified during local run mode.
             </summary>
         </member>
         <member name="P:Cake.Karma.KarmaSettings.RunMode">
@@ -263,6 +397,11 @@
             Evaluate further settings.
             </summary>
         </member>
+        <member name="T:Cake.Karma.KarmaSharedSettings">
+            <summary>
+            Settings shared across start and run commands.
+            </summary>
+        </member>
         <member name="P:Cake.Karma.KarmaSharedSettings.Port">
             <summary>
             Port where the server is listening.
@@ -280,10 +419,26 @@
             Defaults to false.
             </summary>
         </member>
+        <member name="T:Cake.Karma.KarmaRunSettings">
+            <summary>
+            Settings specific to karma run.
+            </summary>
+        </member>
         <member name="P:Cake.Karma.KarmaRunSettings.NoRefresh">
             <summary>
             Do not re-glob all the patterns.
             Defaults to false.
+            </summary>
+        </member>
+        <member name="M:Cake.Karma.KarmaRunSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Applies the settings to the process arguments ready for execution.
+            </summary>
+            <param name="args">The builder to apply the settings to.</param>
+        </member>
+        <member name="T:Cake.Karma.KarmaStartSettings">
+            <summary>
+            Settings specific to karma start.
             </summary>
         </member>
         <member name="P:Cake.Karma.KarmaStartSettings.AutoWatch">
@@ -330,6 +485,12 @@
             <summary>
             Report tests that are slower then given time (ms).
             </summary>
+        </member>
+        <member name="M:Cake.Karma.KarmaStartSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Applies the settings to the process arguments ready for execution.
+            </summary>
+            <param name="args">The builder to apply the settings to.</param>
         </member>
     </members>
 </doc>

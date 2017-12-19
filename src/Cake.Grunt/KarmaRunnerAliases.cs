@@ -5,7 +5,7 @@ using Cake.Core.Annotations;
 namespace Cake.Karma
 {
     /// <summary>
-    /// contains functionality to interact with karma
+    /// Contains functionality to interact with karma start, karma run, or karma init commands.
     /// </summary>
     [CakeAliasCategory("Node")]
     public static class KarmaAliases
@@ -33,7 +33,7 @@ namespace Cake.Karma
         }
 
         /// <summary>
-        /// Runs karma start with a function for settings.
+        /// Runs karma start with settings.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The command settings.</param>
@@ -91,7 +91,7 @@ namespace Cake.Karma
         }
 
         /// <summary>
-        /// Runs karma run with a function for settings.
+        /// Runs karma run with settings.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The command settings.</param>
@@ -149,7 +149,7 @@ namespace Cake.Karma
         }
 
         /// <summary>
-        /// Runs karma init with a function for settings.
+        /// Runs karma init with settings.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="settings">The command settings.</param>
