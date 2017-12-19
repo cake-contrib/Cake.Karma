@@ -81,7 +81,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cake.Grunt\Cake.Karma.csproj">
+    <ProjectReference Include="..\Cake.Karma\Cake.Karma.csproj">
       <Project>{ffc5115c-941b-415c-a729-d84d1473a7ae}</Project>
       <Name>Cake.Karma</Name>
     </ProjectReference>
