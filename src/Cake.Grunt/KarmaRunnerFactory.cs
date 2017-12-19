@@ -1,64 +1,35 @@
-using Cake.Core;
+﻿using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
 namespace Cake.Karma
 {
-    /// <summary>
-    /// Returns a gulp runner based on either a local or global gulp installation via npm
-    /// </summary>
-    public class KarmaLocalRunnerFactory : KarmaRunnerFactory
+    public sealed class KarmaRunnerFactory
     {
-        public KarmaRunnerLocal<KarmaStartSettings> Start => CreateRunner<KarmaStartSettings>();
-        public KarmaRunnerLocal<KarmaRunSettings> Run => CreateRunner<KarmaRunSettings>();
-        public KarmaRunnerLocal<KarmaSettings> Init => CreateRunner<KarmaSettings>();
-
-        public KarmaLocalRunnerFactory(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools)
-            : base(fileSystem, environment, processRunner, tools)
-        {
-        }
-
-        private KarmaRunnerLocal<TSettings> CreateRunner<TSettings>() where TSettings : KarmaSettings, new()
-            => new KarmaRunnerLocal<TSettings>(FileSystem, Environment, ProcessRunner, Tools);
-    }
+        private readonly IFileSystem _fileSystem;
+        private readonly ICakeEnvironment _environment;
+        private readonly IProcessRunner _processRunner;
+        private readonly IToolLocator _tools;
 
 
-
-    public class KarmaGlobalRunnerFactory : KarmaRunnerFactory
-    {
-        public KarmaRunnerGlobal<KarmaStartSettings> Start => CreateRunner<KarmaStartSettings>();
-        public KarmaRunnerGlobal<KarmaRunSettings> Run => CreateRunner<KarmaRunSettings>();
-        public KarmaRunnerGlobal<KarmaSettings> Init => CreateRunner<KarmaSettings>();
-
-        public KarmaGlobalRunnerFactory(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
-            : base(fileSystem, environment, processRunner, tools)
-        {
-        }
-
-        private KarmaRunnerGlobal<TSettings> CreateRunner<TSettings>() where TSettings : KarmaSettings, new() 
-            => new KarmaRunnerGlobal<TSettings>(FileSystem, Environment, ProcessRunner, Tools);
-    }
-
-
-
-    public abstract class KarmaRunnerFactory
-    {
-        protected IFileSystem FileSystem { get; }
-        protected ICakeEnvironment Environment { get; }
-        protected IProcessRunner ProcessRunner { get; }
-        protected IToolLocator Tools { get; }
-
-
-        protected KarmaRunnerFactory(
-            IFileSystem fileSystem,
-            ICakeEnvironment environment,
+        public KarmaRunnerFactory(
+            IFileSystem fileSystem, 
+            ICakeEnvironment environment, 
             IProcessRunner processRunner,
             IToolLocator tools)
         {
-            FileSystem = fileSystem;
-            Environment = environment;
-            ProcessRunner = processRunner;
-            Tools = tools;
+            _fileSystem = fileSystem;
+            _environment = environment;
+            _processRunner = processRunner;
+            _tools = tools;
+        }
+
+
+        public KarmaRunner<TSettings> CreateRunner<TSettings>(KarmaRunMode runMode) where TSettings : KarmaSettings, new()
+        {
+            return runMode == KarmaRunMode.Global 
+                ? new KarmaRunner<TSettings>(_fileSystem, _environment, _processRunner, _tools) 
+                : new KarmaRunnerLocal<TSettings>(_fileSystem, _environment, _processRunner, _tools);
         }
     }
 }

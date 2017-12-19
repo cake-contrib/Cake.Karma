@@ -4,47 +4,157 @@
         <name>Cake.Karma</name>
     </assembly>
     <members>
-        <member name="T:Cake.Karma.KarmaRunnerAliases">
+        <member name="T:Cake.Karma.KarmaAliases">
             <summary>
             contains functionality to interact with karma
             </summary>
         </member>
-        <member name="M:Cake.Karma.KarmaRunnerAliases.KarmaLocal(Cake.Core.ICakeContext)">
+        <member name="M:Cake.Karma.KarmaAliases.KarmaStart(Cake.Core.ICakeContext,System.Action{Cake.Karma.KarmaStartSettings})">
             <summary>
-            Allows access to the karma test runner for the local installation.
+            Runs karma start with a function for settings.
             </summary>
-            <param name="context">The cake context</param>
-            <returns></returns>
+            <param name="context">The context.</param>
+            <param name="configureSettings">Function to supply for configuring settings.</param>
             <example>
-            <para>Run 'karma' from your local karma installation</para>
-            <para>Cake task:</para>
+            <para>Define the configuration file</para>
             <code>
             <![CDATA[
-            Task("Karma")
-                .Does(() =>
-            {
-                KarmaLocal.Start(new KarmaStartSettings());
-            });
+                KarmaStart(settings => 
+                {
+                    settings.ConfigFile = "karma.conf.js";
+                });
             ]]>
             </code>
             </example>
         </member>
-        <member name="M:Cake.Karma.KarmaRunnerAliases.KarmaGlobal(Cake.Core.ICakeContext)">
+        <member name="M:Cake.Karma.KarmaAliases.KarmaStart(Cake.Core.ICakeContext,Cake.Karma.KarmaStartSettings)">
             <summary>
-            Allows access to the karma test runner for the global installation.
+            Runs karma start with a function for settings.
             </summary>
-            <param name="context">The cake context</param>
-            <returns></returns>
+            <param name="context">The context.</param>
+            <param name="settings">The command settings.</param>
             <example>
-            <para>Run 'karma' from your global karma installation</para>
-            <para>Cake task:</para>
+            <para>Define the configuration file</para>
             <code>
             <![CDATA[
-            Task("Karma")
-                .Does(() =>
-            {
-                KarmaGlobal.Start(new KarmaStartSettings());
-            });
+                var settings =
+                    new KarmaStartSettings
+                    {
+                       ConfigFile = "karma.conf.js"
+                    };
+                KarmaStart(settings);
+            ]]>
+            </code>
+            <para>Run locally by specifying the run mode</para>
+            <code>
+            <![CDATA[
+                var settings =
+                    new KarmaStartSettings
+                    {
+                        RunMode = KarmaRunMode.Local,
+                        ConfigFile = "karma.conf.js"
+                    };
+                KarmaStart(settings);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Karma.KarmaAliases.KarmaRun(Cake.Core.ICakeContext,System.Action{Cake.Karma.KarmaRunSettings})">
+            <summary>
+            Runs karma run with a function for settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="configureSettings">Function to supply for configuring settings.</param>
+            <example>
+            <para>Define the configuration file</para>
+            <code>
+            <![CDATA[
+                KarmaRun(settings => 
+                {
+                    settings.ConfigFile = "karma.conf.js";
+                });
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Karma.KarmaAliases.KarmaRun(Cake.Core.ICakeContext,Cake.Karma.KarmaRunSettings)">
+            <summary>
+            Runs karma run with a function for settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The command settings.</param>
+            <example>
+            <para>Define the configuration file</para>
+            <code>
+            <![CDATA[
+                var settings =
+                    new KarmaRunSettings
+                    {
+                       ConfigFile = "karma.conf.js"
+                    };
+                KarmaRun(settings);
+            ]]>
+            </code>
+            <para>Run locally by specifying the run mode</para>
+            <code>
+            <![CDATA[
+                var settings =
+                    new KarmaRunSettings
+                    {
+                        RunMode = KarmaRunMode.Local,
+                        ConfigFile = "karma.conf.js"
+                    };
+                KarmaRun(settings);
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Karma.KarmaAliases.KarmaInit(Cake.Core.ICakeContext,System.Action{Cake.Karma.KarmaSettings})">
+            <summary>
+            Runs karma init with a function for settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="configureSettings">Function to supply for configuring settings.</param>
+            <example>
+            <para>Define the configuration file</para>
+            <code>
+            <![CDATA[
+                KarmaInit(settings => 
+                {
+                    settings.ConfigFile = "karma.conf.js";
+                });
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Karma.KarmaAliases.KarmaInit(Cake.Core.ICakeContext,Cake.Karma.KarmaSettings)">
+            <summary>
+            Runs karma init with a function for settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The command settings.</param>
+            <example>
+            <para>Define the configuration file</para>
+            <code>
+            <![CDATA[
+                var settings =
+                    new KarmaSettings
+                    {
+                       ConfigFile = "karma.conf.js"
+                    };
+                KarmaInit(settings);
+            ]]>
+            </code>
+            <para>Run locally by specifying the run mode</para>
+            <code>
+            <![CDATA[
+                var settings =
+                    new KarmaSettings
+                    {
+                        RunMode = KarmaRunMode.Local,
+                        ConfigFile = "karma.conf.js"
+                    };
+                KarmaInit(settings);
             ]]>
             </code>
             </example>
@@ -54,27 +164,22 @@
             Executes karma
             </summary>
         </member>
-        <member name="T:Cake.Karma.KarmaRunnerGlobal`1">
+        <member name="T:Cake.Karma.KarmaRunner`1">
             <summary>
             The base runner for global karma commands.
             </summary>
         </member>
-        <member name="M:Cake.Karma.KarmaRunnerGlobal`1.Execute(System.Action{`0})">
+        <member name="M:Cake.Karma.KarmaRunner`1.Execute(System.Action{`0})">
             <summary>
             Executes karma
             </summary>
         </member>
-        <member name="M:Cake.Karma.KarmaRunnerGlobal`1.ValidateSettings(`0)">
+        <member name="M:Cake.Karma.KarmaRunner`1.ValidateSettings(`0)">
             <summary>
             Validates settings
             </summary>
             <param name="settings">the settings class</param>
             <exception cref="T:System.IO.FileNotFoundException">when config file does not exist</exception>
-        </member>
-        <member name="T:Cake.Karma.KarmaLocalRunnerFactory">
-            <summary>
-            Returns a gulp runner based on either a local or global gulp installation via npm
-            </summary>
         </member>
         <member name="T:Cake.Karma.KarmaLogLevel">
             <summary>
@@ -111,14 +216,24 @@
             Available Karma reporters.
             </summary>
         </member>
+        <member name="T:Cake.Karma.KarmaRunMode">
+            <summary>
+            Run modes.
+            </summary>
+        </member>
         <member name="T:Cake.Karma.KarmaSettings">
             <summary>
             Settings common across all Karma commands.
             </summary>
         </member>
-        <member name="P:Cake.Karma.KarmaSettings.PathToKarmaCli">
+        <member name="P:Cake.Karma.KarmaSettings.RunMode">
             <summary>
-            Path to Karma CLI. Not optional in Local mode.
+            Run karma locally or globally. Defaults to KarmaRunMode.Global.
+            </summary>
+        </member>
+        <member name="P:Cake.Karma.KarmaSettings.LocalKarmaCli">
+            <summary>
+            Path to Karma CLI. Use this if you want to utilise a local Karma deployment, otherwise Global use is attempted.
             </summary>
         </member>
         <member name="P:Cake.Karma.KarmaSettings.ConfigFile">

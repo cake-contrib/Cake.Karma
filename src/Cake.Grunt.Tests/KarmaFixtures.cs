@@ -13,7 +13,7 @@ namespace Cake.Karma.Tests
 
         protected override void RunTool()
         {
-            var tool = new KarmaRunnerGlobal<TSettings>(FileSystem, Environment, ProcessRunner, Tools);
+            var tool = new KarmaRunner<TSettings>(FileSystem, Environment, ProcessRunner, Tools);
             tool.Execute(Settings);
         }
     }

@@ -7,7 +7,7 @@ using Cake.Core.Tooling;
 
 namespace Cake.Karma
 {
-    public sealed class KarmaRunnerLocal<TSettings> : KarmaRunnerGlobal<TSettings>
+    public sealed class KarmaRunnerLocal<TSettings> : KarmaRunner<TSettings>
         where TSettings : KarmaSettings, new()
     {
         public KarmaRunnerLocal(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
@@ -34,7 +34,7 @@ namespace Cake.Karma
             }
 
             var settings = new TSettings();
-            configure?.Invoke(settings);
+            configure.Invoke(settings);
             Execute(settings);
         }
 
@@ -45,10 +45,16 @@ namespace Cake.Karma
                 throw new ArgumentNullException(nameof(settings));
             }
 
+            // Default the tool file if it is null.
+            if (settings.LocalKarmaCli == null)
+            {
+                settings.LocalKarmaCli = KarmaSettings.DefaultCliFile;
+            }
+
             ValidateSettings(settings);
 
             var args = new ProcessArgumentBuilder();
-            args.AppendQuoted(settings.PathToKarmaCli.ToString());
+            args.AppendQuoted(settings.LocalKarmaCli.ToString());
             args.Append(settings.Command);
             settings.Evaluate(args);
             Run(settings, args);
@@ -58,15 +64,15 @@ namespace Cake.Karma
         {
             base.ValidateSettings(settings);
 
-            if (settings.PathToKarmaCli == null)
+            if (settings.RunMode != KarmaRunMode.Local)
             {
-                throw new ArgumentNullException("settings.PathToKarmaCli", "Path to Karma CLI is required when running in local mode.");
+                throw new InvalidOperationException($"{nameof(KarmaRunnerLocal<TSettings>)} used, but the settings don't specify {nameof(KarmaRunMode.Local)}");
             }
-
-            if (!FileSystem.Exist(settings.PathToKarmaCli))
+            
+            if (!FileSystem.Exist(settings.LocalKarmaCli))
             {
-                var cliFile = settings.PathToKarmaCli.MakeAbsolute(Environment).ToString();
-                throw new FileNotFoundException($"Cannot find the specified Karma CLI file: {cliFile}");
+                var cliFile = settings.LocalKarmaCli.MakeAbsolute(Environment).ToString();
+                throw new FileNotFoundException($"Cannot find the specified Karma CLI file for KarmaRunMode.Local: {cliFile}");
             }
         }
     }
@@ -76,13 +82,13 @@ namespace Cake.Karma
     /// <summary>
     /// The base runner for global karma commands.
     /// </summary>
-    public class KarmaRunnerGlobal<TSettings> : Tool<TSettings> where TSettings : KarmaSettings, new()
+    public class KarmaRunner<TSettings> : Tool<TSettings> where TSettings : KarmaSettings, new()
     {
         protected ICakeEnvironment Environment { get; }
         protected IFileSystem FileSystem { get; }
 
 
-        public KarmaRunnerGlobal(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
+        public KarmaRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
             : base(fileSystem, environment, processRunner, tools)
         {
             Environment = environment;
@@ -112,7 +118,7 @@ namespace Cake.Karma
             }
 
             var settings = new TSettings();
-            configure?.Invoke(settings);
+            configure.Invoke(settings);
 
             Execute(settings);
         }

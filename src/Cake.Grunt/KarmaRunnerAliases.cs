@@ -8,64 +8,194 @@ namespace Cake.Karma
     /// contains functionality to interact with karma
     /// </summary>
     [CakeAliasCategory("Node")]
-    public static class KarmaRunnerAliases
+    public static class KarmaAliases
     {
         /// <summary>
-        /// Allows access to the karma test runner for the local installation.
+        /// Runs karma start with a function for settings.
         /// </summary>
-        /// <param name="context">The cake context</param>
-        /// <returns></returns>
+        /// <param name="context">The context.</param>
+        /// <param name="configureSettings">Function to supply for configuring settings.</param>
         /// <example>
-        /// <para>Run 'karma' from your local karma installation</para>
-        /// <para>Cake task:</para>
+        /// <para>Define the configuration file</para>
         /// <code>
         /// <![CDATA[
-        /// Task("Karma")
-        ///     .Does(() =>
-        /// {
-        ///     KarmaLocal.Start(new KarmaStartSettings());
-        /// });
+        ///     KarmaStart(settings => 
+        ///     {
+        ///         settings.ConfigFile = "karma.conf.js";
+        ///     });
         /// ]]>
         /// </code>
         /// </example>
-        [CakePropertyAlias(Cache = true)]
-        public static KarmaLocalRunnerFactory KarmaLocal(this ICakeContext context)
+        [CakeMethodAlias]
+        public static void KarmaStart(this ICakeContext context, Action<KarmaStartSettings> configureSettings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            return new KarmaLocalRunnerFactory(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            FromLambda(context, configureSettings);
         }
 
         /// <summary>
-        /// Allows access to the karma test runner for the global installation.
+        /// Runs karma start with a function for settings.
         /// </summary>
-        /// <param name="context">The cake context</param>
-        /// <returns></returns>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The command settings.</param>
         /// <example>
-        /// <para>Run 'karma' from your global karma installation</para>
-        /// <para>Cake task:</para>
+        /// <para>Define the configuration file</para>
         /// <code>
         /// <![CDATA[
-        /// Task("Karma")
-        ///     .Does(() =>
-        /// {
-        ///     KarmaGlobal.Start(new KarmaStartSettings());
-        /// });
+        ///     var settings =
+        ///         new KarmaStartSettings
+        ///         {
+        ///            ConfigFile = "karma.conf.js"
+        ///         };
+        ///     KarmaStart(settings);
+        /// ]]>
+        /// </code>
+        /// <para>Run locally by specifying the run mode</para>
+        /// <code>
+        /// <![CDATA[
+        ///     var settings =
+        ///         new KarmaStartSettings
+        ///         {
+        ///             RunMode = KarmaRunMode.Local,
+        ///             ConfigFile = "karma.conf.js"
+        ///         };
+        ///     KarmaStart(settings);
         /// ]]>
         /// </code>
         /// </example>
-        [CakePropertyAlias(Cache = true)]
-        public static KarmaGlobalRunnerFactory KarmaGlobal(this ICakeContext context)
+        [CakeMethodAlias]
+        public static void KarmaStart(this ICakeContext context, KarmaStartSettings settings)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            FromSettings(context, settings);
+        }
 
-            return new KarmaGlobalRunnerFactory(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+        /// <summary>
+        /// Runs karma run with a function for settings.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="configureSettings">Function to supply for configuring settings.</param>
+        /// <example>
+        /// <para>Define the configuration file</para>
+        /// <code>
+        /// <![CDATA[
+        ///     KarmaRun(settings => 
+        ///     {
+        ///         settings.ConfigFile = "karma.conf.js";
+        ///     });
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        public static void KarmaRun(this ICakeContext context, Action<KarmaRunSettings> configureSettings)
+        {
+            FromLambda(context, configureSettings);
+        }
+
+        /// <summary>
+        /// Runs karma run with a function for settings.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The command settings.</param>
+        /// <example>
+        /// <para>Define the configuration file</para>
+        /// <code>
+        /// <![CDATA[
+        ///     var settings =
+        ///         new KarmaRunSettings
+        ///         {
+        ///            ConfigFile = "karma.conf.js"
+        ///         };
+        ///     KarmaRun(settings);
+        /// ]]>
+        /// </code>
+        /// <para>Run locally by specifying the run mode</para>
+        /// <code>
+        /// <![CDATA[
+        ///     var settings =
+        ///         new KarmaRunSettings
+        ///         {
+        ///             RunMode = KarmaRunMode.Local,
+        ///             ConfigFile = "karma.conf.js"
+        ///         };
+        ///     KarmaRun(settings);
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        public static void KarmaRun(this ICakeContext context, KarmaRunSettings settings)
+        {
+            FromSettings(context, settings);
+        }
+
+        /// <summary>
+        /// Runs karma init with a function for settings.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="configureSettings">Function to supply for configuring settings.</param>
+        /// <example>
+        /// <para>Define the configuration file</para>
+        /// <code>
+        /// <![CDATA[
+        ///     KarmaInit(settings => 
+        ///     {
+        ///         settings.ConfigFile = "karma.conf.js";
+        ///     });
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        public static void KarmaInit(this ICakeContext context, Action<KarmaSettings> configureSettings)
+        {
+            FromLambda(context, configureSettings);
+        }
+
+        /// <summary>
+        /// Runs karma init with a function for settings.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="settings">The command settings.</param>
+        /// <example>
+        /// <para>Define the configuration file</para>
+        /// <code>
+        /// <![CDATA[
+        ///     var settings =
+        ///         new KarmaSettings
+        ///         {
+        ///            ConfigFile = "karma.conf.js"
+        ///         };
+        ///     KarmaInit(settings);
+        /// ]]>
+        /// </code>
+        /// <para>Run locally by specifying the run mode</para>
+        /// <code>
+        /// <![CDATA[
+        ///     var settings =
+        ///         new KarmaSettings
+        ///         {
+        ///             RunMode = KarmaRunMode.Local,
+        ///             ConfigFile = "karma.conf.js"
+        ///         };
+        ///     KarmaInit(settings);
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        public static void KarmaInit(this ICakeContext context, KarmaSettings settings)
+        {
+            FromSettings(context, settings);
+        }
+
+        private static void FromLambda<TSettings>(ICakeContext context, Action<TSettings> configureSettings) where TSettings : KarmaSettings, new()
+        {
+            var settings = new TSettings();
+            configureSettings(settings);
+            FromSettings(context, settings);
+        }
+
+        private static void FromSettings<TSettings>(ICakeContext context, TSettings settings) where TSettings : KarmaSettings, new()
+        {
+            var factory = new KarmaRunnerFactory(context.FileSystem, context.Environment, context.ProcessRunner, context.Tools);
+            var runner = factory.CreateRunner<TSettings>(settings.RunMode);
+            runner.Execute(settings);
         }
     }
 }

@@ -67,6 +67,7 @@ namespace Cake.Karma.Tests
             _fixture.Settings = new KarmaSettings
             {
                 ConfigFile = _configFile,
+                RunMode = KarmaRunMode.Local
             };
 
             var result = _fixture.Run();
@@ -80,10 +81,22 @@ namespace Cake.Karma.Tests
             _fixture.Settings = new KarmaStartSettings
             {
                 ConfigFile = _configFile,
-                PathToKarmaCli = "karma-cli"
+                LocalKarmaCli = "karma-cli",
+                RunMode = KarmaRunMode.Local
             };
 
             Should.Throw<FileNotFoundException>(() => _fixture.Run());
+        }
+
+        [Fact]
+        public void LocalRunnerRequiresCorrectLocalRunMode()
+        {
+            _fixture.Settings = new KarmaStartSettings
+            {
+                ConfigFile = _configFile
+            };
+
+            Should.Throw<InvalidOperationException>(() => _fixture.Run());
         }
     }
 }

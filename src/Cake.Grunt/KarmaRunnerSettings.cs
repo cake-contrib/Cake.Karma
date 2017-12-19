@@ -46,6 +46,17 @@ namespace Cake.Karma
         Growl,
         Coverage
     }
+
+
+
+    /// <summary>
+    /// Run modes.
+    /// </summary>
+    public enum KarmaRunMode
+    {
+        Local,
+        Global
+    }
     
 
 
@@ -59,9 +70,14 @@ namespace Cake.Karma
         internal virtual string Command { get; } = "init";
 
         /// <summary>
-        /// Path to Karma CLI. Not optional in Local mode.
+        /// Run karma locally or globally. Defaults to KarmaRunMode.Global.
         /// </summary>
-        public FilePath PathToKarmaCli { get; set; } = DefaultCliFile;
+        public KarmaRunMode RunMode { get; set; } = KarmaRunMode.Global;
+
+        /// <summary>
+        /// Path to Karma CLI. Use this if you want to utilise a local Karma deployment, otherwise Global use is attempted.
+        /// </summary>
+        public FilePath LocalKarmaCli { get; set; }
 
         /// <summary>
         /// The conf.js file to use.
