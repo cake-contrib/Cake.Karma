@@ -62,7 +62,7 @@ namespace Cake.Karma.Tests
         [Fact]
         public void SettingsShouldDefaultCliFile()
         {
-            _fixture.FileSystem.CreateFile(KarmaSettings.DefaultCliFile);
+            _fixture.FileSystem.CreateFile(KarmaSettings.DefaultLocalKarmaCli);
 
             _fixture.Settings = new KarmaSettings
             {
@@ -72,7 +72,7 @@ namespace Cake.Karma.Tests
 
             var result = _fixture.Run();
 
-            result.Args.ShouldBe($"\"{KarmaSettings.DefaultCliFile}\" init \"karma.conf.js\"");
+            result.Args.ShouldBe($"\"{KarmaSettings.DefaultLocalKarmaCli}\" init \"karma.conf.js\"");
         }
 
         [Fact]
@@ -86,17 +86,6 @@ namespace Cake.Karma.Tests
             };
 
             Should.Throw<FileNotFoundException>(() => _fixture.Run());
-        }
-
-        [Fact]
-        public void LocalRunnerRequiresCorrectLocalRunMode()
-        {
-            _fixture.Settings = new KarmaStartSettings
-            {
-                ConfigFile = _configFile
-            };
-
-            Should.Throw<InvalidOperationException>(() => _fixture.Run());
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Cake.Karma
         }
 
         /// <summary>
-        /// Execute the runner with the specified settings. If LocalKarmaCli is not set, it defaults to <see cref="KarmaSettings.DefaultCliFile" />.
+        /// Execute the runner with the specified settings. If LocalKarmaCli is not set, it defaults to <see cref="KarmaSettings.DefaultLocalKarmaCli" />.
         /// </summary>
         /// <param name="settings">Command settings.</param>
         /// <exception cref="ArgumentNullException">Thrown if settings is null.</exception>
@@ -62,9 +62,9 @@ namespace Cake.Karma
             // Default the tool file if it is null.
             if (settings.LocalKarmaCli == null)
             {
-                settings.LocalKarmaCli = KarmaSettings.DefaultCliFile;
+                settings.LocalKarmaCli = KarmaSettings.DefaultLocalKarmaCli;
             }
-
+            
             ValidateSettings(settings);
 
             var args = new ProcessArgumentBuilder();
@@ -91,8 +91,8 @@ namespace Cake.Karma
             
             if (!FileSystem.Exist(settings.LocalKarmaCli))
             {
-                var cliFile = settings.LocalKarmaCli.MakeAbsolute(Environment).ToString();
-                throw new FileNotFoundException($"Cannot find the specified Karma CLI file for KarmaRunMode.Local: {cliFile}");
+                var karmaFile = settings.LocalKarmaCli.MakeAbsolute(Environment).ToString();
+                throw new FileNotFoundException($"Cannot find the specified Karma CLI file for KarmaRunMode.Local: {karmaFile}");
             }
         }
     }
@@ -109,6 +109,7 @@ namespace Cake.Karma
         /// A reference to the supplied <see cref="ICakeEnvironment" />.
         /// </summary>
         protected ICakeEnvironment Environment { get; }
+
         /// <summary>
         /// A reference to the supplied <see cref="IFileSystem" />.
         /// </summary>
@@ -122,7 +123,8 @@ namespace Cake.Karma
         /// <param name="environment"></param>
         /// <param name="processRunner"></param>
         /// <param name="tools"></param>
-        public KarmaRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner, IToolLocator tools) 
+        public KarmaRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner,
+            IToolLocator tools)
             : base(fileSystem, environment, processRunner, tools)
         {
             Environment = environment;
@@ -160,7 +162,7 @@ namespace Cake.Karma
             {
                 throw new ArgumentNullException(nameof(settings));
             }
-
+            
             ValidateSettings(settings);
 
             var args = new ProcessArgumentBuilder();

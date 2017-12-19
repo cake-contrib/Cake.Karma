@@ -62,7 +62,7 @@ namespace Cake.Karma.Tests
         [Fact]
         public void SettingsShouldDefaultCliFile()
         {
-            _fixture.FileSystem.CreateFile(KarmaSettings.DefaultCliFile);
+            _fixture.FileSystem.CreateFile(KarmaSettings.DefaultLocalKarmaCli);
 
             _fixture.Settings = new KarmaStartSettings
             {
@@ -72,7 +72,7 @@ namespace Cake.Karma.Tests
 
             var result = _fixture.Run();
 
-            result.Args.ShouldBe($"\"{KarmaSettings.DefaultCliFile}\" start \"karma.conf.js\"");
+            result.Args.ShouldBe($"\"{KarmaSettings.DefaultLocalKarmaCli}\" start \"karma.conf.js\"");
         }
 
         [Fact]

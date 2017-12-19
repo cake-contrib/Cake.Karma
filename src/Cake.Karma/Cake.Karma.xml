@@ -188,7 +188,7 @@
         </member>
         <member name="M:Cake.Karma.KarmaRunnerLocal`1.Execute(`0)">
             <summary>
-            Execute the runner with the specified settings. If LocalKarmaCli is not set, it defaults to <see cref="F:Cake.Karma.KarmaSettings.DefaultCliFile" />.
+            Execute the runner with the specified settings. If LocalKarmaCli is not set, it defaults to <see cref="F:Cake.Karma.KarmaSettings.DefaultLocalKarmaCli" />.
             </summary>
             <param name="settings">Command settings.</param>
             <exception cref="T:System.ArgumentNullException">Thrown if settings is null.</exception>
@@ -355,7 +355,7 @@
             Settings common across all Karma commands.
             </summary>
         </member>
-        <member name="F:Cake.Karma.KarmaSettings.DefaultCliFile">
+        <member name="F:Cake.Karma.KarmaSettings.DefaultLocalKarmaCli">
             <summary>
             The default Karma CLI file, if one is not specified during local run mode.
             </summary>

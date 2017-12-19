@@ -70,6 +70,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="GeneralSettingsTests.cs" />
     <Compile Include="KarmaFixtures.cs" />
     <Compile Include="KarmaRunTests.cs" />
     <Compile Include="KarmaInitTests.cs" />

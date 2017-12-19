@@ -89,7 +89,7 @@ namespace Cake.Karma
         /// <summary>
         /// The default Karma CLI file, if one is not specified during local run mode.
         /// </summary>
-        public const string DefaultCliFile = "node_modules/karma-cli/bin/karma";
+        public const string DefaultLocalKarmaCli = "node_modules/karma-cli/bin/karma";
 
         internal virtual string Command { get; } = "init";
 
@@ -102,12 +102,12 @@ namespace Cake.Karma
         /// Path to Karma CLI. Use this if you want to utilise a local Karma deployment, otherwise Global use is attempted.
         /// </summary>
         public FilePath LocalKarmaCli { get; set; }
-
+        
         /// <summary>
         /// The conf.js file to use.
         /// </summary>
         public FilePath ConfigFile { get; set; }
-
+        
         /// <summary>
         /// Level of logging.
         /// </summary>
