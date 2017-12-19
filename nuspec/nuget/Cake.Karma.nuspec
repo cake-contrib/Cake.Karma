@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Cake.Karma</id>
+    <version>0.0.0</version>
+    <authors>Adam Houldsworth</authors>
+    <owners>Adam Houldsworth, cake-contrib</owners>
+    <description>Cake Karma Addin.</description>
+    <summary>A set of aliases for Cake to help with running Karma as part of a build.</summary>
+    <licenseUrl>https://github.com/cake-contrib/Cake.Karma/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/cake-contrib/Cake.Karma/</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright (c) Cake Contributions 2017 - Present</copyright>
+    <tags>Cake, Script, Build, Karma, Addin</tags>
+  </metadata>
+  <files>
+    <file src="Cake.Karma.dll" target="lib\net461" />
+    <file src="Cake.Karma.pdb" target="lib\net461" />
+    <file src="Cake.Karma.xml" target="lib\net461" />
+  </files>
+</package>

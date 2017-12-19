@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.Grunt</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.Grunt.KarmaRunnerAliases">
+            <summary>
+            contains functionality to interact with grunt
+            </summary>
+        </member>
+        <member name="M:Cake.Grunt.KarmaRunnerAliases.KarmaLocal(Cake.Core.ICakeContext)">
+            <summary>
+            Allows access to the karma test runner for the local installation.
+            </summary>
+            <param name="context">The cake context</param>
+            <returns></returns>
+            <example>
+            <para>Run 'karma' from your local karma installation</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Karma")
+                .Does(() =>
+            {
+                KarmaLocal.Start(new KarmaStartSettings());
+            });
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Grunt.KarmaRunnerAliases.KarmaGlobal(Cake.Core.ICakeContext)">
+            <summary>
+            Allows access to the karma test runner for the global installation.
+            </summary>
+            <param name="context">The cake context</param>
+            <returns></returns>
+            <example>
+            <para>Run 'karma' from your global karma installation</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Karma")
+                .Does(() =>
+            {
+                KarmaGlobal.Start(new KarmaStartSettings());
+            });
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Grunt.KarmaRunnerLocal`1.Execute(System.Action{`0})">
+            <summary>
+            Executes grunt
+            </summary>
+        </member>
+        <member name="T:Cake.Grunt.KarmaRunnerGlobal`1">
+            <summary>
+            The base runner for global karma commands.
+            </summary>
+        </member>
+        <member name="M:Cake.Grunt.KarmaRunnerGlobal`1.Execute(System.Action{`0})">
+            <summary>
+            Executes grunt
+            </summary>
+        </member>
+        <member name="M:Cake.Grunt.KarmaRunnerGlobal`1.ValidateSettings(`0)">
+            <summary>
+            Validates settings
+            </summary>
+            <param name="settings">the settings class</param>
+            <exception cref="T:System.IO.FileNotFoundException">when grunt file does not exist</exception>
+        </member>
+        <member name="T:Cake.Grunt.KarmaLocalRunnerFactory">
+            <summary>
+            Returns a gulp runner based on either a local or global gulp installation via npm
+            </summary>
+        </member>
+        <member name="T:Cake.Grunt.KarmaLogLevel">
+            <summary>
+            Available Karma logging levels.
+            </summary>
+        </member>
+        <member name="F:Cake.Grunt.KarmaLogLevel.Disable">
+            <summary>
+            No logging.
+            </summary>
+        </member>
+        <member name="F:Cake.Grunt.KarmaLogLevel.Error">
+            <summary>
+            Log errors.
+            </summary>
+        </member>
+        <member name="F:Cake.Grunt.KarmaLogLevel.Warn">
+            <summary>
+            Log warnings.
+            </summary>
+        </member>
+        <member name="F:Cake.Grunt.KarmaLogLevel.Info">
+            <summary>
+            Log info.
+            </summary>
+        </member>
+        <member name="F:Cake.Grunt.KarmaLogLevel.Debug">
+            <summary>
+            Log diagnostics.
+            </summary>
+        </member>
+        <member name="T:Cake.Grunt.KarmaReporter">
+            <summary>
+            Available Karma reporters.
+            </summary>
+        </member>
+        <member name="T:Cake.Grunt.KarmaSettings">
+            <summary>
+            Settings common across all Karma commands.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSettings.PathToKarmaCli">
+            <summary>
+            Path to Karma CLI. Not optional in Local mode.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSettings.ConfigFile">
+            <summary>
+            The conf.js file to use.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSettings.LogLevel">
+            <summary>
+            Level of logging.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSettings.Colors">
+            <summary>
+            Use colors when reporting or printing logs.
+            Defaults to false.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSettings.NoColors">
+            <summary>
+            Do not use colors when reporting or printing logs.
+            Defaults to false.
+            </summary>
+        </member>
+        <member name="M:Cake.Grunt.KarmaSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluate further settings.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSharedSettings.Port">
+            <summary>
+            Port where the server is listening.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSharedSettings.FailOnEmptyTestSuite">
+            <summary>
+            Fail on empty test suite.
+            Defaults to false.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaSharedSettings.NoFailOnEmptyTestSuite">
+            <summary>
+            Do not fail on empty test suite.
+            Defaults to false.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaRunSettings.NoRefresh">
+            <summary>
+            Do not re-glob all the patterns.
+            Defaults to false.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.AutoWatch">
+            <summary>
+            Auto watch source files and run on change.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.NoAutoWatch">
+            <summary>
+            Do not watch source files.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.Detached">
+            <summary>
+            Detach the server.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.Reporters">
+            <summary>
+            List of reporters.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.Browsers">
+            <summary>
+            List of browsers to start.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.CaptureTimeout">
+            <summary>
+            Kill browser if does not capture in given time (ms).
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.SingleRun">
+            <summary>
+            Run the test when the browsers captured and exit.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.NoSingleRun">
+            <summary>
+            Disable single-run.
+            </summary>
+        </member>
+        <member name="P:Cake.Grunt.KarmaStartSettings.ReportSlowerThan">
+            <summary>
+            Report tests that are slower then given time (ms).
+            </summary>
+        </member>
+    </members>
+</doc>
