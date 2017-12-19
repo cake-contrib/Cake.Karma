@@ -31,7 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>Cake.Grunt.xml</DocumentationFile>
+    <DocumentationFile>Cake.Karma.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Cake.Core, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
