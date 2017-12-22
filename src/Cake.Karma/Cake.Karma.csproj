@@ -56,7 +56,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="addins.cake" />
+    <None Include="appveyor.cake" />
+    <None Include="build.cake" />
+    <None Include="chocolatey.cake" />
+    <None Include="coveralls.cake" />
+    <None Include="credentials.cake" />
+    <None Include="gitreleasemanager.cake" />
+    <None Include="gitter.cake" />
+    <None Include="gitversion.cake" />
+    <None Include="load.cake" />
+    <None Include="nuget.cake" />
+    <None Include="packages.cake" />
     <None Include="packages.config" />
+    <None Include="parameters.cake" />
+    <None Include="paths.cake" />
+    <None Include="resharper.cake" />
+    <None Include="slack.cake" />
+    <None Include="testing.cake" />
+    <None Include="tools.cake" />
+    <None Include="twitter.cake" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
