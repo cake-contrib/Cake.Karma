@@ -8,14 +8,14 @@ Cake.Karma is a set of aliases for Cake to help with running Karma as part of a 
 
 | | Stable | Pre-release |
 |---|---|---|
-|GitHub Release|-|[![GitHub release](https://img.shields.io/github/release/cake-contrib/Cake.Grunt.svg)](https://github.com/cake-contrib/Cake.Grunt/releases/latest)|
-|NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Grunt.svg)](https://www.nuget.org/packages/Cake.Grunt)|[![NuGet](https://img.shields.io/nuget/vpre/Cake.Grunt.svg)](https://www.nuget.org/packages/Cake.Grunt)|
+|GitHub Release|-|[![GitHub release](https://img.shields.io/github/release/cake-contrib/Cake.Karma.svg)](https://github.com/cake-contrib/Cake.Karma/releases/latest)|
+|NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Karma.svg)](https://www.nuget.org/packages/Cake.Karma)|[![NuGet](https://img.shields.io/nuget/vpre/Cake.Karma.svg)](https://www.nuget.org/packages/Cake.Karma)|
 
 ## Build Status
 
 |Develop|Master|
 |:--:|:--:|
-|[![Build status](https://ci.appveyor.com/api/projects/status/ox95k7k1svl4nhkd/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-grunt/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/ox95k7k1svl4nhkd/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-grunt/branch/master)|
+|[![Build status](https://ci.appveyor.com/api/projects/status/ox95k7k1svl4nhkd/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-karma/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/ox95k7k1svl4nhkd/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-karma/branch/master)|
 
 ## Code Coverage
 
