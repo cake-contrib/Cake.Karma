@@ -15,7 +15,7 @@ Cake.Karma is a set of aliases for Cake to help with running Karma as part of a 
 
 |Develop|Master|
 |:--:|:--:|
-|[![Build status](https://ci.appveyor.com/api/projects/status/ox95k7k1svl4nhkd/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-karma/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/ox95k7k1svl4nhkd/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-karma/branch/master)|
+|[![Build status](https://ci.appveyor.com/api/projects/status/6exhf0i454w2xxsn/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-karma/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/6exhf0i454w2xxsn/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-karma/branch/master)|
 
 ## Code Coverage
 
