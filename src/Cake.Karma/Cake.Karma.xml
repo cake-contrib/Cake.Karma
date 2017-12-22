@@ -419,6 +419,12 @@
             Defaults to false.
             </summary>
         </member>
+        <member name="M:Cake.Karma.KarmaSharedSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Applies the settings to the process arguments ready for execution.
+            </summary>
+            <param name="args">The builder to apply the settings to.</param>
+        </member>
         <member name="T:Cake.Karma.KarmaRunSettings">
             <summary>
             Settings specific to karma run.

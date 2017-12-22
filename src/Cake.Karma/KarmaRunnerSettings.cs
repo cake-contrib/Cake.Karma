@@ -184,6 +184,10 @@ namespace Cake.Karma
         /// </summary>
         public bool NoFailOnEmptyTestSuite { get; set; }
 
+        /// <summary>
+        /// Applies the settings to the process arguments ready for execution.
+        /// </summary>
+        /// <param name="args">The builder to apply the settings to.</param>
         protected override void EvaluateCore(ProcessArgumentBuilder args)
         {
             base.EvaluateCore(args);

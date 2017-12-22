@@ -4,8 +4,6 @@ namespace Cake.Karma.Tests
 {
     public class KarmaGlobalFixture<TSettings> : ToolFixture<TSettings> where TSettings : KarmaSettings, new()
     {
-        public TSettings Settings { get; set; }
-
         public KarmaGlobalFixture() 
             : base("karma")
         {
@@ -22,8 +20,6 @@ namespace Cake.Karma.Tests
 
     public class KarmaLocalFixture<TSettings> : ToolFixture<TSettings> where TSettings : KarmaSettings, new()
     {
-        public TSettings Settings { get; set; }
-
         public KarmaLocalFixture()
             : base("node")
         {
